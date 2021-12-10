@@ -13,7 +13,9 @@ func splitOnSpace(x string) []string {
 	var result []string
 	pi := 0
 	ps := false
-	for i, c := range x {
+	// NBSP shouldn‘t count when splitting
+	str := strings.ReplaceAll(x, "\u00A0", "_")
+	for i, c := range str {
 		s := unicode.IsSpace(c)
 		if s != ps && i > 0 {
 			result = append(result, x[pi:i])
